@@ -1,333 +1,780 @@
 <!DOCTYPE html>
-<html class="dark" lang="es">
+<html lang="es">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
-    <title>Gedeones Camp | Actividades</title>
-    <meta name="description" content="Próximas actividades del campamento Gedeones Monteverde." />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap"
-        rel="stylesheet" />
-    <!-- Material Symbols -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="description" content="Turno de oración semanal del Camp. Monteverde" />
+    <title>Turno de Oración — Camp. Monteverde</title>
+
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
     <style>
-        /* Tema oscuro fijo */
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Source Serif 4', serif;
+        /* ===== Variables iOS ===== */
+        :root {
+            --ios-blue: #007AFF;
+            --ios-green: #34C759;
+            --ios-orange: #FF9500;
+            --ios-red: #FF3B30;
+            --ios-gray: #8E8E93;
+            --ios-gray2: #AEAEB2;
+            --ios-gray3: #C7C7CC;
+            --ios-gray4: #D1D1D6;
+            --ios-gray5: #E5E5EA;
+            --ios-gray6: #F2F2F7;
+
+            --gideon-deep: #00303A;
+            --gideon-teal: #287385;
+            --gideon-gold: #BD8C60;
+
+            --bg: #F2F2F7;
+            --card-bg: #FFFFFF;
+            --text: #000000;
+            --text-secondary: #3C3C43;
+            --text-tertiary: #8E8E93;
+            --separator: rgba(60, 60, 67, 0.12);
+
+            --radius-card: 20px;
+            --radius-btn: 14px;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
-        /* Drawer (lateral oculto por defecto) */
-        .drawer {
-            position: fixed;
-            top: 0;
-            left: -280px;
-            width: 280px;
-            height: 100%;
-            background-color: #1e1e1e;
-            border-right: 1px solid #3a3a3a;
-            z-index: 1000;
-            transition: left 0.3s ease;
-            overflow-y: auto;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .drawer.open {
-            left: 0;
-        }
-
-        /* Overlay para cerrar el drawer al hacer clic fuera */
-        .drawer-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
-
-        .drawer-overlay.active {
-            display: block;
-        }
-
-        /* Header fijo */
-        .app-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #121212;
-            border-bottom: 1px solid #3a3a3a;
-            z-index: 50;
-            padding: 0 1rem;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        /* Contenido principal - sin márgenes laterales forzados */
-        .main-content {
-            padding-top: 80px;
-            padding-left: 1rem;
-            padding-right: 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        @media (min-width: 768px) {
-            .main-content {
-                padding-left: 2rem;
-                padding-right: 2rem;
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000000;
+                --card-bg: #1C1C1E;
+                --text: #FFFFFF;
+                --text-secondary: #EBEBF5;
+                --text-tertiary: #8E8E93;
+                --separator: rgba(84, 84, 88, 0.36);
+                --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
             }
         }
 
-        /* Estilos de tarjetas y elementos */
-        .bento-card {
-            background-color: #1e1e1e;
-            border: 1px solid #3a3a3a;
-            transition: transform 0.2s ease;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .bento-card:hover {
-            transform: translateY(-4px);
+        html,
+        body {
+            height: 100%;
         }
 
-        .soft-shadow {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: calc(96px + env(safe-area-inset-bottom));
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
         }
 
-        .text-primary {
-            color: #a5d0b9;
+        /* ===== Barra superior tipo iOS ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 40;
+            background: rgba(242, 242, 247, 0.82);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 0.5px solid var(--separator);
+            padding: calc(10px + env(safe-area-inset-top)) 20px 12px;
+            text-align: center;
+            transition: background 0.3s, border-color 0.3s;
         }
 
-        .bg-primary-container {
-            background-color: #1b4332;
+        @media (prefers-color-scheme: dark) {
+            .navbar {
+                background: rgba(28, 28, 30, 0.82);
+            }
         }
 
-        .border-outline-variant {
-            border-color: #3a3a3a;
+        .navbar h1 {
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            color: var(--text);
         }
 
-        .text-on-surface-variant {
-            color: #b0b0b0;
+        .navbar .subtitulo {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 1px;
+            font-weight: 500;
         }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            line-height: 1;
-            vertical-align: middle;
+        /* ===== Contenedor ===== */
+        main {
+            width: 100%;
+            max-width: 520px;
+            padding: 20px 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: 'Hanken Grotesk', sans-serif;
+        /* ===== Tarjetas iOS ===== */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow);
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
-        /* Botón de menú */
-        .menu-btn {
-            background: none;
-            border: none;
-            color: #a5d0b9;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 9999px;
-            transition: background 0.2s;
+        /* ===== Tarjeta principal ===== */
+        .card-principal {
+            padding: 24px 22px 22px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .menu-btn:hover {
-            background-color: #2a2a2a;
+        .card-principal::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gideon-teal), var(--gideon-gold));
+            border-radius: var(--radius-card) var(--radius-card) 0 0;
         }
 
-        /* Links del drawer */
-        .drawer a {
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(40, 115, 133, 0.12);
+            color: var(--gideon-teal);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 100px;
+            margin-bottom: 14px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .badge {
+                background: rgba(40, 115, 133, 0.25);
+                color: #5FC8E0;
+            }
+        }
+
+        .fecha-linea {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            color: #e0e0e0;
-            text-decoration: none;
+            justify-content: center;
+            gap: 7px;
+            color: var(--text-tertiary);
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .nombre-grande {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 24px;
+            word-break: break-word;
+        }
+
+        /* ===== Botón iOS pill ===== */
+        .btn-ios {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            border: none;
+            border-radius: var(--radius-btn);
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: transform 0.15s ease, background 0.2s ease, opacity 0.2s;
+        }
+
+        .btn-ios:active {
+            transform: scale(0.97);
+            opacity: 0.85;
+        }
+
+        .btn-primario {
+            background: var(--gideon-teal);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(40, 115, 133, 0.3);
+        }
+
+        .btn-primario:hover {
+            background: #1f5a68;
+        }
+
+        .btn-primario.copiado {
+            background: var(--ios-green);
+            box-shadow: 0 4px 14px rgba(52, 199, 89, 0.3);
+        }
+
+        /* ===== Tarjeta siguiente ===== */
+        .card-siguiente {
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .card-siguiente .info {
+            text-align: left;
+        }
+
+        .card-siguiente .etiqueta-sec {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--gideon-gold);
+            margin-bottom: 6px;
+        }
+
+        .card-siguiente .fecha-sec {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
+        }
+
+        .card-siguiente .nombre-medio {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        .card-siguiente .icono-chevron {
+            font-size: 18px;
+            color: var(--ios-gray3);
+            flex-shrink: 0;
+        }
+
+        /* ===== Versículo ===== */
+        .card-versiculo {
+            padding: 22px 22px 20px;
+        }
+
+        .card-versiculo .etiqueta-sec {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--gideon-gold);
+            margin-bottom: 12px;
+        }
+
+        .card-versiculo .texto {
+            font-size: 17px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            letter-spacing: -0.2px;
+            margin-bottom: 12px;
+        }
+
+        .card-versiculo .texto::before {
+            content: "\201C";
+        }
+
+        .card-versiculo .texto::after {
+            content: "\201D";
+        }
+
+        .card-versiculo .ref {
+            text-align: right;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gideon-teal);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .card-versiculo .ref {
+                color: #5FC8E0;
+            }
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-align: center;
+            padding: 0 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== FAB iOS ===== */
+        .fab-instalar {
+            position: fixed;
+            bottom: calc(20px + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gideon-deep);
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            padding: 14px 26px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 48, 58, 0.35);
+            z-index: 50;
+            font-family: inherit;
+            transition: transform 0.2s ease, opacity 0.2s;
+        }
+
+        .fab-instalar:hover {
+            transform: translateX(-50%) scale(1.04);
+        }
+
+        .fab-instalar:active {
+            transform: translateX(-50%) scale(0.97);
+        }
+
+        .fab-instalar.oculto {
+            display: none;
+        }
+
+        /* ===== Modal iOS ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.activo {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @media (min-width: 540px) {
+            .modal-overlay {
+                align-items: center;
+                padding: 20px;
+            }
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border-radius: 22px 22px 0 0;
+            max-width: 440px;
+            width: 100%;
+            padding: 28px 24px calc(24px + env(safe-area-inset-bottom));
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.activo .modal {
+            transform: translateY(0);
+        }
+
+        @media (min-width: 540px) {
+            .modal {
+                border-radius: 22px;
+                padding-bottom: 24px;
+            }
+        }
+
+        .modal .icono {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--gideon-teal), var(--gideon-deep));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 16px;
+            box-shadow: 0 6px 20px rgba(40, 115, 133, 0.35);
+        }
+
+        .modal h2 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .modal p {
+            font-size: 15px;
+            line-height: 1.45;
+            color: var(--text-tertiary);
+            margin-bottom: 16px;
+        }
+
+        .modal ul {
+            text-align: left;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0 0 22px 18px;
+            line-height: 1.6;
+        }
+
+        .modal ul li {
+            margin-bottom: 6px;
+        }
+
+        .modal ul strong {
+            color: var(--text);
+        }
+
+        .modal .acciones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-secundario {
+            background: transparent;
+            color: var(--ios-blue);
+            border: none;
+            border-radius: var(--radius-btn);
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
             transition: background 0.2s;
         }
 
-        .drawer a:hover,
-        .drawer a.active {
-            background-color: #1b4332;
-            color: #a5d0b9;
+        .btn-secundario:hover {
+            background: rgba(0, 122, 255, 0.08);
         }
 
-        /* Evitar scroll del body cuando drawer está abierto */
-        body.no-scroll {
-            overflow: hidden;
+        .btn-secundario:active {
+            background: rgba(0, 122, 255, 0.15);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Header con botón de menú -->
-    <header class="app-header">
-        <div class="flex items-center gap-3">
-            <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
-                <span class="material-symbols-outlined text-2xl">menu</span>
+    <nav class="navbar">
+        <h1>Turno de Oración</h1>
+        <div class="subtitulo">Camp. Monteverde</div>
+    </nav>
+
+    <main>
+        <!-- Tarjeta principal -->
+        <section class="card card-principal">
+            <div class="badge">
+                <i class="fa-regular fa-clock"></i> Este lunes · <span id="hora-principal"></span>
+            </div>
+            <div class="fecha-linea">
+                <i class="fa-regular fa-calendar"></i> <span id="fecha-principal"></span>
+            </div>
+            <div class="nombre-grande" id="nombre-principal">—</div>
+            <button class="btn-ios btn-primario" id="btn-copiar">
+                <i class="fa-regular fa-copy"></i>
+                <span id="btn-copiar-texto">Copiar mensaje para recordar la oración</span>
             </button>
-            <span class="material-symbols-outlined text-primary text-2xl">
-                local_fire_department
-            </span>
-            <h1 class="font-headline-md text-headline-md font-bold text-primary">Gedeones Monteverde</h1>
-        </div>
-    </header>
-
-    <!-- Drawer (menú lateral) -->
-    <div class="drawer" id="drawer">
-        <a href="index.html" class="active">
-            <span class="material-symbols-outlined">event_note</span>
-            <span>Actividades</span>
-        </a>
-        <a href="gabinete.html">
-            <span class="material-symbols-outlined">shield_person</span>
-            <span>Gabinete</span>
-        </a>
-        <a href="integrantes.html">
-            <span class="material-symbols-outlined">groups</span>
-            <span>Integrantes</span>
-        </a>
-    </div>
-
-    <!-- Overlay para cerrar drawer al hacer clic fuera -->
-    <div class="drawer-overlay" id="drawerOverlay"></div>
-
-    <!-- Contenido principal -->
-    <main class="main-content">
-        <!-- Hero -->
-        <section class="mb-12">
-            <div class="relative rounded-2xl overflow-hidden h-64 md:h-80">
-                <img alt="Bosque nuboso Monteverde" class="absolute inset-0 w-full h-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbV6uLG9fwux25yGEjIVZTu0bvcwk2sqZoaJdLgl7DRgMqqptXywfWabxJNK29o4kGzvH6ptJLv8YOwqGQG69kX8x5T1rH5fKv-zLjks7O1yC6EzTzGq-WVP0sDhOmLNArwtMy23oPLwv_4zUFB0xllYHe9kold-FgFRDeSfie1NxHDOgfOUdR9MM7v7Yt1SG-o91Q5lJBgO6Cy1BZ5sb0NH_uj24cqY6FT8-cpDZ9aklnLEGMQDzCBqWU4EMEhpR9X9sdnlHHZ2c"
-                    loading="lazy" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
-                    <p class="text-white text-lg italic">"Donde la naturaleza se encuentra con el espíritu"</p>
-                </div>
-            </div>
         </section>
 
-        <!-- Actividades destacadas -->
-        <section class="mb-12">
-            <div class="flex items-baseline gap-3 mb-6">
-                <span
-                    class="font-label-md text-label-md text-primary px-2 py-0.5 bg-primary-container rounded uppercase">Próximas</span>
-                <h2 class="font-headline-lg text-headline-lg text-primary">Actividades</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bento-card p-6 rounded-xl soft-shadow flex flex-col">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="text-center bg-primary-container px-4 py-2 rounded-xl">
-                            <span class="block font-bold text-headline-md text-primary">15</span>
-                            <span class="block font-label-sm text-primary uppercase">OCT</span>
-                        </div>
-                        <div>
-                            <h3 class="font-headline-md text-headline-md text-on-surface">Caminata de Oración</h3>
-                            <p class="text-on-surface-variant">Sendero Bosque Nuboso</p>
-                        </div>
-                    </div>
-                    <p class="text-on-surface-variant mb-4 flex-1">Un encuentro de meditación y conexión espiritual en
-                        medio de la naturaleza.</p>
-                    <button
-                        class="w-fit px-5 py-2 bg-primary-container text-primary rounded-full font-label-md flex items-center gap-2 hover:bg-opacity-80 transition active:scale-95">
-                        <span>Más información</span>
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                    </button>
+        <!-- Tarjeta siguiente -->
+        <section class="card card-siguiente">
+            <div class="info">
+                <div class="etiqueta-sec">
+                    <i class="fa-solid fa-arrow-right"></i> Siguiente lunes · <span id="hora-siguiente"></span>
                 </div>
-                <div class="bento-card p-6 rounded-xl soft-shadow flex flex-col">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="text-center bg-primary-container px-4 py-2 rounded-xl">
-                            <span class="block font-bold text-headline-md text-primary">22</span>
-                            <span class="block font-label-sm text-primary uppercase">OCT</span>
-                        </div>
-                        <div>
-                            <h3 class="font-headline-md text-headline-md text-on-surface">Taller de Liderazgo</h3>
-                            <p class="text-on-surface-variant">Salón Comunal</p>
-                        </div>
-                    </div>
-                    <p class="text-on-surface-variant mb-4 flex-1">Capacitación para nuevos líderes del campamento.
-                        Trabajo en equipo y toma de decisiones.</p>
-                    <button
-                        class="w-fit px-5 py-2 bg-primary-container text-primary rounded-full font-label-md flex items-center gap-2 hover:bg-opacity-80 transition active:scale-95">
-                        <span>Más información</span>
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                    </button>
-                </div>
+                <div class="fecha-sec" id="fecha-siguiente"></div>
+                <div class="nombre-medio" id="nombre-siguiente">—</div>
             </div>
+            <i class="fa-solid fa-chevron-right icono-chevron"></i>
         </section>
 
-        <!-- Calendario de eventos -->
-        <section class="mb-12">
-            <div class="bg-[#2a2a2a] rounded-xl p-6 border border-outline-variant">
-                <h3 class="font-headline-md text-headline-md text-primary mb-4">Calendario de eventos</h3>
-                <ul class="divide-y divide-outline-variant">
-                    <li class="py-3 flex justify-between items-center">
-                        <span>🔹 28 de octubre - Noche de fogata</span>
-                        <span class="text-sm text-on-surface-variant">18:00 h</span>
-                    </li>
-                    <li class="py-3 flex justify-between items-center">
-                        <span>🔹 5 de noviembre - Reforestación comunitaria</span>
-                        <span class="text-sm text-on-surface-variant">09:00 h</span>
-                    </li>
-                    <li class="py-3 flex justify-between items-center">
-                        <span>🔹 12 de noviembre - Concierto de alabanza</span>
-                        <span class="text-sm text-on-surface-variant">16:00 h</span>
-                    </li>
-                </ul>
-            </div>
+        <!-- Versículo -->
+        <section class="card card-versiculo">
+            <div class="etiqueta-sec"><i class="fa-solid fa-book-open"></i> Versículo del día</div>
+            <div class="texto" id="versiculo-texto">—</div>
+            <div class="ref" id="versiculo-ref">—</div>
         </section>
     </main>
 
+    <footer>
+        <i class="fa-solid fa-dove"></i> Camp. Monteverde · Turno de Oración · v<span id="version">—</span>
+    </footer>
+
+    <!-- Botón flotante instalar -->
+    <button class="fab-instalar oculto" id="fab-instalar">
+        <i class="fa-solid fa-download"></i> Instalar aplicación
+    </button>
+
+    <!-- Modal de instalación -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="icono"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <h2>Instala Turno de Oración</h2>
+            <p>Añade esta app a tu pantalla de inicio para acceder rápidamente al turno de oración cada semana.</p>
+            <ul id="instrucciones-instalar">
+                <li><strong>Android / Chrome:</strong> toca "Instalar" abajo.</li>
+                <li><strong>iPhone / Safari:</strong> Compartir → Añadir a pantalla de inicio.</li>
+            </ul>
+            <div class="acciones">
+                <button class="btn-ios btn-primario" id="btn-instalar-modal">
+                    <i class="fa-solid fa-download"></i> Instalar
+                </button>
+                <button class="btn-secundario" id="btn-cancelar">Ahora no</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datos -->
+    <script src="data.js"></script>
+
     <script>
-        // Control del drawer
-        const menuBtn = document.getElementById('menuBtn');
-        const drawer = document.getElementById('drawer');
-        const overlay = document.getElementById('drawerOverlay');
-        const body = document.body;
+        // ============================================================
+        //  LÓGICA DE LA APP
+        // ============================================================
 
-        function openDrawer() {
-            drawer.classList.add('open');
-            overlay.classList.add('active');
-            body.classList.add('no-scroll');
+        function proximoLunes() {
+            const ahora = new Date();
+            const horaReunion = parseInt(DATA.hora.split(":")[0], 10);
+            const minutoReunion = parseInt(DATA.hora.split(":")[1], 10);
+
+            const resultado = new Date(ahora);
+            resultado.setHours(horaReunion, minutoReunion, 0, 0);
+
+            const diaSemana = resultado.getDay();
+            let diasHastaLunes = (1 - diaSemana + 7) % 7;
+
+            if (diasHastaLunes === 0 && ahora >= resultado) {
+                diasHastaLunes = 7;
+            }
+
+            resultado.setDate(resultado.getDate() + diasHastaLunes);
+            return resultado;
         }
 
-        function closeDrawer() {
-            drawer.classList.remove('open');
-            overlay.classList.remove('active');
-            body.classList.remove('no-scroll');
+        function formatearFecha(fecha) {
+            const opciones = { day: "numeric", month: "long", year: "numeric" };
+            return fecha.toLocaleDateString("es-ES", opciones);
         }
 
-        menuBtn.addEventListener('click', openDrawer);
-        overlay.addEventListener('click', closeDrawer);
+        function calcularIndice(lunes) {
+            const inicio = new Date(DATA.fechaInicio + "T00:00:00");
+            const msPorSemana = 7 * 24 * 60 * 60 * 1000;
+            const diffMs = lunes.getTime() - inicio.getTime();
+            const semanas = Math.floor(diffMs / msPorSemana);
+            const total = DATA.nombres.length;
+            return ((semanas % total) + total) % total;
+        }
 
-        // Cerrar drawer al hacer clic en cualquier enlace dentro del drawer
-        const drawerLinks = drawer.querySelectorAll('a');
-        drawerLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                closeDrawer();
-            });
+        const lunesActual = proximoLunes();
+        const lunesSiguiente = new Date(lunesActual);
+        lunesSiguiente.setDate(lunesSiguiente.getDate() + 7);
+
+        const idxActual = calcularIndice(lunesActual);
+        const idxSiguiente = (idxActual + 1) % DATA.nombres.length;
+
+        const nombreActual = DATA.nombres[idxActual];
+        const nombreSiguiente = DATA.nombres[idxSiguiente];
+
+        document.getElementById("hora-principal").textContent = DATA.horaTexto;
+        document.getElementById("hora-siguiente").textContent = DATA.horaTexto;
+        document.getElementById("fecha-principal").textContent = formatearFecha(lunesActual);
+        document.getElementById("fecha-siguiente").textContent = formatearFecha(lunesSiguiente);
+        document.getElementById("nombre-principal").textContent = nombreActual;
+        document.getElementById("nombre-siguiente").textContent = nombreSiguiente;
+
+        // Versión visible en footer
+        document.getElementById("version").textContent = DATA.version || "—";
+
+        // Versículo aleatorio
+        const v = DATA.versiculos[Math.floor(Math.random() * DATA.versiculos.length)];
+        document.getElementById("versiculo-texto").textContent = v.texto;
+        document.getElementById("versiculo-ref").textContent = `— ${v.ref}`;
+
+        // ---------- Botón copiar ----------
+        const btnCopiar = document.getElementById("btn-copiar");
+        const btnCopiarTexto = document.getElementById("btn-copiar-texto");
+
+        const mensaje = `Hola ${nombreActual} 👋, te recuerdo que este lunes ${formatearFecha(lunesActual)} a las ${DATA.horaTexto} te corresponde dirigir la oración en la reunión del ${DATA.grupo}. ¡Gracias por tu servicio! 🙏`;
+
+        btnCopiar.addEventListener("click", async () => {
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(mensaje);
+                } else {
+                    const ta = document.createElement("textarea");
+                    ta.value = mensaje;
+                    ta.style.position = "fixed";
+                    ta.style.opacity = "0";
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(ta);
+                }
+                btnCopiar.classList.add("copiado");
+                btnCopiarTexto.textContent = "¡Mensaje copiado!";
+                setTimeout(() => {
+                    btnCopiar.classList.remove("copiado");
+                    btnCopiarTexto.textContent = "Copiar mensaje para recordar la oración";
+                }, 2200);
+            } catch (err) {
+                btnCopiarTexto.textContent = "No se pudo copiar";
+                setTimeout(() => {
+                    btnCopiarTexto.textContent = "Copiar mensaje para recordar la oración";
+                }, 2200);
+            }
         });
+
+        // ============================================================
+        //  PWA — Registro del Service Worker con auto-actualización
+        // ============================================================
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("sw.js").then((reg) => {
+                    reg.addEventListener("updatefound", () => {
+                        const nuevo = reg.installing;
+                        if (!nuevo) return;
+                        nuevo.addEventListener("statechange", () => {
+                            if (nuevo.state === "installed" && navigator.serviceWorker.controller) {
+                                window.location.reload();
+                            }
+                        });
+                    });
+                }).catch(() => { });
+            });
+
+            let recargando = false;
+            navigator.serviceWorker.addEventListener("controllerchange", () => {
+                if (recargando) return;
+                recargando = true;
+                window.location.reload();
+            });
+        }
+
+        // ============================================================
+        //  PWA — Modal de instalación
+        // ============================================================
+        const CLAVE_INSTALADA = "pwa_instalada";
+        const modal = document.getElementById("modal-overlay");
+        const fab = document.getElementById("fab-instalar");
+        const btnInstalarModal = document.getElementById("btn-instalar-modal");
+        const btnCancelar = document.getElementById("btn-cancelar");
+
+        let promptDiferido = null;
+
+        function estaInstalada() {
+            const standalone = window.matchMedia("(display-mode: standalone)").matches
+                || window.navigator.standalone === true;
+            return standalone || localStorage.getItem(CLAVE_INSTALADA) === "1";
+        }
+
+        function abrirModal() { modal.classList.add("activo"); }
+        function cerrarModal() { modal.classList.remove("activo"); }
+
+        window.addEventListener("beforeinstallprompt", (e) => {
+            e.preventDefault();
+            promptDiferido = e;
+            if (!estaInstalada()) {
+                fab.classList.remove("oculto");
+                if (!sessionStorage.getItem("modal_mostrado")) {
+                    abrirModal();
+                    sessionStorage.setItem("modal_mostrado", "1");
+                }
+            }
+        });
+
+        window.addEventListener("appinstalled", () => {
+            localStorage.setItem(CLAVE_INSTALADA, "1");
+            fab.classList.add("oculto");
+            cerrarModal();
+        });
+
+        fab.addEventListener("click", abrirModal);
+
+        btnInstalarModal.addEventListener("click", async () => {
+            if (promptDiferido) {
+                promptDiferido.prompt();
+                const { outcome } = await promptDiferido.userChoice;
+                if (outcome === "accepted") {
+                    localStorage.setItem(CLAVE_INSTALADA, "1");
+                    fab.classList.add("oculto");
+                }
+                promptDiferido = null;
+                cerrarModal();
+            } else {
+                cerrarModal();
+            }
+        });
+
+        btnCancelar.addEventListener("click", cerrarModal);
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) cerrarModal();
+        });
+
+        window.addEventListener("load", () => {
+            if (!estaInstalada() && !("onbeforeinstallprompt" in window)) {
+                if (!sessionStorage.getItem("modal_mostrado")) {
+                    abrirModal();
+                    sessionStorage.setItem("modal_mostrado", "1");
+                }
+            }
+        });
+
+        if (estaInstalada()) {
+            fab.classList.add("oculto");
+        }
     </script>
 </body>
 

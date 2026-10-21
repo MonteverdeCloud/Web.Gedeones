@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Fondo circular con borde amarillo -->
+  <circle cx="256" cy="256" r="256" fill="#1B2A4A"/>
+  <circle cx="256" cy="256" r="240" fill="none" stroke="#F2C94C" stroke-width="16"/>
+
+  <!-- Llama exterior (rojo intenso) - forma ancha y con lenguas laterales -->
+  <path d="M256 90
+           C 220 150, 180 200, 170 260
+           C 160 300, 165 340, 190 370
+           C 175 340, 180 310, 200 290
+           C 195 330, 210 365, 256 390
+           C 302 365, 317 330, 312 290
+           C 332 310, 337 340, 322 370
+           C 347 340, 352 300, 342 260
+           C 332 200, 292 150, 256 90 Z"
+        fill="#E63946"/>
+
+  <!-- Llama media (naranja) -->
+  <path d="M256 160
+           C 230 210, 210 250, 210 290
+           C 210 320, 225 345, 256 360
+           C 287 345, 302 320, 302 290
+           C 302 250, 282 210, 256 160 Z"
+        fill="#F28C28"/>
+
+  <!-- Núcleo de la llama (amarillo brillante) -->
+  <path d="M256 230
+           C 240 260, 236 290, 256 320
+           C 276 290, 272 260, 256 230 Z"
+        fill="#F2C94C"/>
+
+  <!-- Chispa blanca central -->
+  <path d="M256 270
+           C 250 285, 250 300, 256 310
+           C 262 300, 262 285, 256 270 Z"
+        fill="#FFF8E1"/>
+</svg>
